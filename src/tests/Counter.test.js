@@ -14,8 +14,9 @@ describe("Counter", () => {
     test("deve atualizar o valor do contador para 3 quando o botao + for clicado 3 vezes", async () => {
         const user = userEvent.setup() 
         render(<Counter/>)
-      
+        
         const item = screen.getByText(/0/i)
+
         const plusBtn = screen.getByRole('button', {
             name: /\+/i
         })
@@ -24,6 +25,7 @@ describe("Counter", () => {
         await user.click(plusBtn)
         await user.click(plusBtn)
 
-        expect(item).toBeInTheDocument("3")
+        // expect(item).toBeInTheDocument("3") --> falso positivo. apenas verifica se o item esta no documento e nao recebe parametro
+        expect(item).toHaveTextContent("3")
     })
 })
